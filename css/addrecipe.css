@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.ingredientEntry,
+.stepEntry {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.ingredientEntry input,
+.stepEntry input,
+.stepEntry textarea {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.add-remove-btn {
+    display: flex;
+    align-items: center;
+}
+
+.add-remove-btn button {
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .ingredientEntry,
+    .stepEntry {
+        flex-direction: column;
+    }
+
+    .ingredientEntry input,
+    .stepEntry input,
+    .stepEntry textarea {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .add-remove-btn {
+        justify-content: flex-end;
+    }
+}
