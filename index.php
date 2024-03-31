@@ -115,7 +115,7 @@ if (isset($_SESSION['loggedin'])) {
       <div class="container">
     <?php
     while ($recipe = mysqli_fetch_assoc($result)) {
-        echo '<div class="max-w-sm rounded overflow-hidden shadow-lg mb-4 mt-4">';
+        echo '<div style="background-color: white;" class="max-w-sm rounded overflow-hidden shadow-lg mb-4 mt-4">';
         echo '<a href="recipeDetails.php?id=' . $recipe['recipe_id'] . '" style="text-decoration: none; color: inherit;">';
         echo '<img class="w-full" style="height: 19rem;" src="data:image/jpeg;base64,' . base64_encode($recipe['files']) . '" alt="' . $recipe['title'] . '">';
         echo '<div class="px-6 py-4">';
