@@ -144,8 +144,8 @@ if(isset($_GET['id'])) {
             <select id="role" name="role" required>
                 <option value="" disabled>Select Role</option>
                 <option value="RecipeSeeker" <?php echo (isset($user) && $user['role'] == 'RecipeSeeker') ? 'selected' : ''; ?>>Recipe Seeker</option>
-                <option value="Chef" <?php echo (isset($user) && $user['role'] == 'Chef') ? 'selected' : ''; ?>>Chef</option>
-                <option value="Admin" <?php echo (isset($user) && $user['role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
+                <option value="chef" <?php echo (isset($user) && $user['role'] == 'chef') ? 'selected' : ''; ?>>Chef</option>
+                <option value="admin" <?php echo (isset($user) && $user['role'] == 'admin') ? 'selected' : ''; ?>>Admin</option>
             </select>
 
             <button type="submit" name="submit"><?php echo isset($user) ? 'Update' : 'Submit'; ?></button>

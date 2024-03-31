@@ -40,10 +40,7 @@ if (isset($_SESSION['loggedin']) && ($_SESSION['role'] === 'chef' || $_SESSION['
             $serving_size = $_POST['serving_size'];
             $category_id = $_POST['category'];
             // Validate category_id
-            if (!isset($category_id) || empty($category_id) || $category_id == 0) {
-                echo "Category is required.";
-                exit();
-            }
+         
             // Add validation and sanitization as needed
             $query = "UPDATE Recipes SET title=?, description=?, instructions=?, prep_time=?, cook_time=?, total_time=?, serving_size=?, category_id=? WHERE recipe_id=?";
             $stmt = $conn->prepare($query);
