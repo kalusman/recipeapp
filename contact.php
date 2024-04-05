@@ -72,7 +72,7 @@
 
             <button type="submit">Send Message</button>
         </form>
-        <p>Or you can email me at <a href="mailto:email@example.com">email@example.com</a>.</p>
+        <p>Or you can email us at <a href="mailto:kalusman75.com">kalusman75.com</a>.</p>
     </div>
     <?php include("./header/footer.php"); ?>
 

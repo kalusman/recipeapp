@@ -16,13 +16,13 @@
         <div class="footer-content">
             <div class="footer-left">
                 <h3>Company Name</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis justo eu ipsum sodales rutrum.</p>
+                <p>Open Kitchen: Your Recipe Haven - This establishment is dedicated to providing a wide array of delectable and flavorful dishes that cater to the discerning tastes of its clientele.</p>
             </div>
             <div class="footer-right">
                 <h3>Contact Us</h3>
-                <p>123 Main Street, City, Country</p>
-                <p>Email: info@example.com</p>
-                <p>Phone: +123456789</p>
+                <p>123 Main Street, City, Nigeria</p>
+                <p>Email: kalusman75@gmail.com</p>
+                <p>Phone: +2348068358552</p>
             </div>
         </div>
     </div>

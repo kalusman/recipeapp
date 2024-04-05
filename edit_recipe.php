@@ -38,19 +38,60 @@ if (isset($_SESSION['loggedin']) && ($_SESSION['role'] === 'chef' || $_SESSION['
             $cook_time = $_POST['cook_time'];
             $total_time = $_POST['total_time'];
             $serving_size = $_POST['serving_size'];
-            $category_id = $_POST['category'];
+            $category_id = $_POST['category_id'];
             // Validate category_id
-         
+          
             // Add validation and sanitization as needed
-            $query = "UPDATE Recipes SET title=?, description=?, instructions=?, prep_time=?, cook_time=?, total_time=?, serving_size=?, category_id=? WHERE recipe_id=?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("sssiiiiii", $title, $description, $instructions, $prep_time, $cook_time, $total_time, $serving_size, $category_id, $recipe_id);
-            if ($stmt->execute()) {
-                header("Location: recipeDetails.php?id=$recipe_id");
-                exit();
-            } else {
-                echo "Error updating recipe: " . $conn->error;
-            }
+           // Update the recipe details
+    $query = "UPDATE Recipes SET title=?, description=?, instructions=?, prep_time=?, cook_time=?, total_time=?, serving_size=?, category_id=? WHERE recipe_id=?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("sssiiiiii", $title, $description, $instructions, $prep_time, $cook_time, $total_time, $serving_size, $category_id, $recipe_id);
+    if (!$stmt->execute()) {
+        echo "Error updating recipe details: " . $conn->error;
+        exit();
+    }
+
+    // Update ingredients
+    $ingredient_names = $_POST['ingredient_name'];
+    $ingredient_quantities = $_POST['ingredient_quantity'];
+    $delete_ingredients_query = "DELETE FROM Ingredients WHERE recipe_id=?";
+    $stmt = $conn->prepare($delete_ingredients_query);
+    $stmt->bind_param("i", $recipe_id);
+    $stmt->execute();
+    $insert_ingredient_query = "INSERT INTO Ingredients (recipe_id, name, quantity) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($insert_ingredient_query);
+    $stmt->bind_param("iss", $recipe_id, $ingredient_name, $ingredient_quantity);
+    foreach ($ingredient_names as $key => $ingredient_name) {
+        $ingredient_quantity = $ingredient_quantities[$key];
+        $stmt->execute();
+    }
+
+    // Update preparation steps
+    $step_numbers = $_POST['step_number'];
+    $step_descriptions = $_POST['step_description'];
+    $delete_steps_query = "DELETE FROM preparationsteps WHERE recipe_id=?";
+    $stmt = $conn->prepare($delete_steps_query);
+    $stmt->bind_param("i", $recipe_id);
+    $stmt->execute();
+    $insert_step_query = "INSERT INTO preparationsteps (recipe_id, step_number, description) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($insert_step_query);
+    $stmt->bind_param("iis", $recipe_id, $step_number, $step_description);
+    foreach ($step_numbers as $key => $step_number) {
+        $step_description = $step_descriptions[$key];
+        $stmt->execute();
+    }
+   // Handle file upload if a file was selected
+if (isset($_FILES['file']) && $_FILES['file']['name'] != '') {
+    $file = $_FILES['file']['tmp_name'];
+    $file_content = file_get_contents($file);
+    $file_content = mysqli_real_escape_string($conn, $file_content);
+    $query = "UPDATE Recipes SET files = '$file_content' WHERE recipe_id = $recipe_id";
+    mysqli_query($conn, $query);
+}
+
+  
+    header("Location: recipeDetails.php?id=$recipe_id");
+    exit();
         }
         ?>
         <form id="recipeForm" method="post" action="">
@@ -91,14 +132,14 @@ if (isset($_SESSION['loggedin']) && ($_SESSION['role'] === 'chef' || $_SESSION['
             </div>
 
             <div class="form-group">
-                <label for="category">Category:</label>
-                <select id="category" name="category" class="form-control">
+                <label for="category_id">Category:</label>
+                <select id="category_id" name="category_id" class="form-control">
                     <?php
                     $query = "SELECT * FROM Categories";
                     $result = $conn->query($query);
                     while ($row = $result->fetch_assoc()) {
-                        $selected = ($row['category_id'] == $recipe['category_id']) ? 'selected' : '';
-                        echo "<option value='{$row['category_id']}' $selected>{$row['name']}</option>";
+                        $selected = ($row['id'] == $recipe['id']) ? 'selected' : '';
+                        echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
                     }
                     ?>
                 </select>
